@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import formation.sopra.projetFormation.entity.Personne;
 import formation.sopra.projetFormation.repository.PersonneRepository;
 import formation.sopra.projetFormation.service.PersonneService;
 
+@SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestPersonne {
 
