@@ -13,16 +13,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Entity
 @Table(name = "login_role")
 @SequenceGenerator(name = "seqLoginRole", sequenceName = "seq_login_role", initialValue = 50, allocationSize = 1)
 public class LoginRole {
+	@JsonView(Views.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLoginRole")
 	private Integer id;
+	
 	@ManyToOne
 	@JoinColumn(name = "mail_person", foreignKey = @ForeignKey(name = "login_role_mail_person_fk"))
 	private Personne personne;
+	
+	@JsonView(Views.Common.class)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", length = 30)
 	private Role role;

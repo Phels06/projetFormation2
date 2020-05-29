@@ -29,25 +29,33 @@ import javax.persistence.Version;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Entity
 @Table(name = "ad")
 @NamedQueries({
 		@NamedQuery(query = "select a from Annonce a left join fetch a.maitre m left join fetch a.promeneur pr left join fetch a.chiens c left join fetch a.postulers po", name = "Annonce.findAll") })
 @SequenceGenerator(name = "seqAnnonce", sequenceName = "seq_ad", initialValue = 100, allocationSize = 1)
 public class Annonce {
+	@JsonView(Views.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAnnonce")
 	@Column(name = "id_ad")
 	private Integer id;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "date_ad")
 	@Temporal(TemporalType.DATE)
 	@FutureOrPresent
 	private Date dateAnnonce;
 	
+	@JsonView(Views.Common.class)
 	@Enumerated(EnumType.STRING)
 	private Note note;
 	
+	@JsonView(Views.Common.class)
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "nbChiens", column = @Column(name = "number_of_dogs")),
 			@AttributeOverride(name = "nbHeures", column = @Column(name = "number_of_hours")),
@@ -55,10 +63,12 @@ public class Annonce {
 			@AttributeOverride(name = "taxe", column = @Column(name = "tax")),
 			@AttributeOverride(name = "prixTotal", column = @Column(name = "total_price")) })
 	private Tarif tarif;
+	
 	@OneToOne()
 	@JoinColumn(name = "id_master", foreignKey = @ForeignKey(name = "ad_master_fk"))
 	@NotEmpty
 	private Personne maitre;
+	
 	@OneToOne()
 	@JoinColumn(name = "id_walker", foreignKey = @ForeignKey(name = "ad_walker_fk"))
 	private Personne promeneur;
