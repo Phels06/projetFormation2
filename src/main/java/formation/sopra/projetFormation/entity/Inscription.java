@@ -1,8 +1,10 @@
 package formation.sopra.projetFormation.entity;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
@@ -15,6 +17,9 @@ public class Inscription {
 	@Pattern( regexp="^([+-])?[0-9]+([,.][0-9]{1,2})?", 
 			 message="mot de passe invalide. Il doit suivre ######,## ou #####.##")
 	private String motDePasse;
+	private boolean enable;
+	@OneToMany(mappedBy = "personne")
+	private Set<LoginRole> roles;
 
 	public Inscription() {
 	}
@@ -47,12 +52,28 @@ public class Inscription {
 		this.mail = mail;
 	}
 
-	public String getMotdePasse() {
+	public String getMotDePasse() {
 		return motDePasse;
 	}
 
-	public void setMotdePasse(String motDePasse) {
+	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public Set<LoginRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<LoginRole> roles) {
+		this.roles = roles;
 	}
 
 	@Override

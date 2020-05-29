@@ -44,13 +44,13 @@ public class PersonneService {
 		if (personne.getNom().isEmpty()) {
 			succes = false;
 		}
-		if (personne.getInscription().getMotdePasse().isEmpty()) {
+		if (personne.getInscription().getMotDePasse().isEmpty()) {
 			succes = false;
 		}
 		// au moins 1 minuscule, 1 majuscule1 1 chiffre
 		if (succes == true) {
-			for (int i = 0; i < personne.getInscription().getMotdePasse().length(); i++) {
-				caractereString = personne.getInscription().getMotdePasse().charAt(i);
+			for (int i = 0; i < personne.getInscription().getMotDePasse().length(); i++) {
+				caractereString = personne.getInscription().getMotDePasse().charAt(i);
 				if (Character.isDigit(caractereString)) {
 					numberFlag = true;
 				} else if (Character.isUpperCase(caractereString)) {
@@ -88,9 +88,9 @@ public class PersonneService {
 		Optional<Personne> opt = personneRepository.findById(personne.getId());
 		if (opt.isPresent()) {
 			Personne personneEnBase = opt.get();
-			if (personne.getInscription().getMotdePasse() != null) {
-				for (int i = 0; i < personne.getInscription().getMotdePasse().length(); i++) {
-					caractereString = personne.getInscription().getMotdePasse().charAt(i);
+			if (personne.getInscription().getMotDePasse() != null) {
+				for (int i = 0; i < personne.getInscription().getMotDePasse().length(); i++) {
+					caractereString = personne.getInscription().getMotDePasse().charAt(i);
 					if (Character.isDigit(caractereString)) {
 						numberFlag = true;
 					} else if (Character.isUpperCase(caractereString)) {
@@ -100,7 +100,7 @@ public class PersonneService {
 					}
 				}
 				if (numberFlag && majusculeFlag && minusculeFlag) {
-					personneEnBase.getInscription().setMotdePasse((personne.getInscription().getMotdePasse()));
+					personneEnBase.getInscription().setMotDePasse((personne.getInscription().getMotDePasse()));
 				} else {
 					throw new IllegalArgumentException();
 				}

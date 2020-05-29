@@ -15,7 +15,7 @@ public interface PersonneRepository extends JpaRepository<Personne, Integer> {
 	List<Personne> findByPrenom(String prenom);
 	@Query("select p from Personne p where p.adresse.ville=:ville ")
 	List<Personne> findByVille(@Param("ville") String ville);
-	@Query("select p from Personne l left join fetch p.inscription.roles where p.inscription.mail=:mail")
+	@Query("select p from Personne p left join fetch p.inscription.roles where p.inscription.mail=:mail")
 	public Optional<Personne> findByMailWithRoles(String mail);
 	
 }

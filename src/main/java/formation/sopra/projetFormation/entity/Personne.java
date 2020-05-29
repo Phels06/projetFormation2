@@ -38,7 +38,8 @@ public class Personne {
 	@AttributeOverrides({
 			@AttributeOverride(name = "dateInscription", column = @Column(name = "inscription_date_person", nullable = false)),
 			@AttributeOverride(name = "mail", column = @Column(name = "mail_person", nullable = false)),
-			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 50, nullable = false)) })
+			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 50, nullable = false)),
+			@AttributeOverride(name = "enable", column = @Column(name = "enable_person", nullable = false))})
 	private Inscription inscription;
 	@Column(name = "title", length = 4)
 	@Enumerated(EnumType.STRING)
