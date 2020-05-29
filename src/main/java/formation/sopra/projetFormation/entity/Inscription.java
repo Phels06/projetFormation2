@@ -10,14 +10,21 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Embeddable
 public class Inscription {
 	//@Temporal(TemporalType.DATE) ??
+	@JsonView(Views.Common.class)
 	private LocalDate dateInscription;
+	@JsonView(Views.Common.class)
 	@Email
 	private String mail;
 	@Pattern( regexp="^([+-])?[0-9]+([,.][0-9]{1,2})?", 
 			 message="mot de passe invalide. Il doit suivre ######,## ou #####.##")
+	@JsonView(Views.Common.class)
 	private String motDePasse;
 	private boolean enable;
 	@OneToMany(mappedBy = "personne")

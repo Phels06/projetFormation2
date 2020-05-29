@@ -1,5 +1,6 @@
 package formation.sopra.projetFormation.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,8 @@ public class PersonneService {
 		return succes;
 	}
 
+	
+	
 	public Personne miseAjour(Personne personne) {
 		char caractereString;
 		Boolean majusculeFlag = false;
@@ -144,6 +147,7 @@ public class PersonneService {
 		}
 	}
 
+
 	public Personne recherche(Integer id) {
 		Optional<Personne> opt = personneRepository.findById(id);
 		if (opt.isPresent()) {
@@ -151,7 +155,7 @@ public class PersonneService {
 		}
 		throw new IllegalArgumentException();
 	}
-	
+
 
 
 }

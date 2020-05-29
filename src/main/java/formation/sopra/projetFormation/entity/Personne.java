@@ -20,30 +20,40 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 
 @Entity
 @Table(name = "person")
 @SequenceGenerator(name = "seqPersonne", sequenceName = "seq_person", initialValue = 100, allocationSize = 1)
 public class Personne {
+	@JsonView(Views.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPersonne")
 	@Column(name = "id_person")
 	private Integer id;
+	@JsonView(Views.Common.class)
 	@Column(name = "first_name", length = 150, nullable = false)
 	@NotEmpty
 	private String prenom;
+	@JsonView(Views.Common.class)
 	@Column(name = "last_name", length = 150, nullable = false)
 	private String nom;
+	@JsonView(Views.Common.class)
 	@Embedded
 	@AttributeOverrides({
-			@AttributeOverride(name = "dateInscription", column = @Column(name = "inscription_date_person", nullable = false)),
+			@AttributeOverride(name = "dateInscription", column = @Column(name = "inscription_date_person")),
 			@AttributeOverride(name = "mail", column = @Column(name = "mail_person", nullable = false)),
 			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 50, nullable = false)),
 			@AttributeOverride(name = "enable", column = @Column(name = "enable_person", nullable = false))})
 	private Inscription inscription;
+	@JsonView(Views.Common.class)
 	@Column(name = "title", length = 4)
 	@Enumerated(EnumType.STRING)
 	private Civilite civilite;
+	@JsonView(Views.Common.class)
 	@Embedded
 	@AttributeOverrides({
 			@AttributeOverride(name = "numero", column = @Column(name = "number_person", nullable = false)),
