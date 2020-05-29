@@ -3,12 +3,17 @@ package formation.sopra.projetFormation.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 @Embeddable
 public class Inscription {
 	//@Temporal(TemporalType.DATE) ??
 	private LocalDate dateInscription;
+	@Email
 	private String mail;
+	@Pattern( regexp="^([+-])?[0-9]+([,.][0-9]{1,2})?", 
+			 message="mot de passe invalide. Il doit suivre ######,## ou #####.##")
 	private String motDePasse;
 
 	public Inscription() {
