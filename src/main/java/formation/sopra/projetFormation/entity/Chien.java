@@ -16,6 +16,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Entity
 @Table(name = "dog")
 @SequenceGenerator(name = "seqChien", sequenceName = "seq_dog", initialValue = 100, allocationSize = 1)
@@ -25,18 +29,25 @@ public class Chien {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqChien")
 	@Column(name = "id_dog")
+	@JsonView(Views.Common.class)
 	private Integer id;
+	@JsonView(Views.Common.class)
 	@Column(name = "surname", length = 150, nullable = false)
 	private String surnom;
+	@JsonView(Views.Common.class)
 	@Column(name = "sexe", length = 1)
 	@Enumerated(EnumType.STRING)
 	private SexeChien sexeChien;
+	@JsonView(Views.Common.class)
 	@Column(name = "age", length = 3)
 	private Integer age;
+	@JsonView(Views.Common.class)
 	@Column(name = "picture", length = 150)
 	private String photo;
+	@JsonView(Views.Common.class)
 	@Column(name = "weigth")
 	private Integer poids;
+	@JsonView(Views.Common.class)
 	@Column(name = "breed", length = 150)
 	private String race;
 	@ManyToOne

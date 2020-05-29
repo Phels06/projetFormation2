@@ -1,6 +1,7 @@
 package formation.sopra.projetFormation;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import formation.sopra.projetFormation.service.ChienService;
 
 //Class de test executer avec une class particuli�re de Spring
 //Traiter la classe comme un Bean
+@SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestChien {
 

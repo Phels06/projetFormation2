@@ -13,6 +13,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Entity
 @Table(name = "opinion")
 @SequenceGenerator(name = "seqAvis", sequenceName = "seq_opinion", initialValue = 100, allocationSize = 1)
@@ -20,9 +24,10 @@ public class Avis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAvis")
 	@Column(name = "id_opinion")
+	@JsonView(Views.Common.class)
 	private Integer id;
-	@Lob
 	@Column(name = "opinion")
+	@JsonView(Views.Common.class)
 	private String avis;
 	@ManyToOne
 	@JoinColumn(name = "id_person", foreignKey = @ForeignKey(name = "opinion_person_fk"))
