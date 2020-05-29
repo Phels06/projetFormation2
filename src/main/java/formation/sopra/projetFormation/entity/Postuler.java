@@ -7,11 +7,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Entity
 @Table(name = "person_ad")
 @NamedQueries({
 		@NamedQuery(query = "select po from Postuler po left join fetch po.id pa left join fetch pa.personne pe left join fetch pa.annonce an", name = "Postuler.findAll") })
 public class Postuler {
+	@JsonView(Views.Common.class)
 	@EmbeddedId
 	private PostulerKey id;
 	@Version

@@ -12,9 +12,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,7 @@ import formation.sopra.projetFormation.entity.Personne;
 import formation.sopra.projetFormation.repository.AnnonceRepository;
 import formation.sopra.projetFormation.service.AnnonceService;
 
+@SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestAnnonce {
 
@@ -35,7 +38,7 @@ public class TestAnnonce {
 	private AnnonceService annonceService;
 	private static SimpleDateFormat sdf;
 
-	@BeforeClass
+	@BeforeAll
 	public static void initDateFormat() {
 		sdf = new SimpleDateFormat("dd/MM/yyyy");
 	}

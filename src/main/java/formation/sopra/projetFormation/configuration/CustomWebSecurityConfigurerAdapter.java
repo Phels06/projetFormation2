@@ -24,11 +24,8 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 	@Autowired
 	private AuthService authService;
 
-	// regles acces aux url
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		// @formatter:off
 		http
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous()
 			.and()
@@ -38,38 +35,11 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 //			.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic()
 //			.and()
 			.authorizeRequests().anyRequest().permitAll();
-//		http.authorizeRequests()
-//			.antMatchers("/").permitAll()
-//			.antMatchers("/bootstrap/**").permitAll()
-//			.antMatchers("/matiere","/matiere/**").hasAnyRole("ADMIN")
-//			.antMatchers("/admin","/admin/**").authenticated()
-//			.antMatchers("/**").authenticated().and()
-//			.formLogin()
-//				.loginPage("/login")
-//				//.loginProcessingUrl("/perform")//page qui apparait pendant l'authentification
-//				.defaultSuccessUrl("/home")
-//				.failureUrl("/login?error=true").permitAll()
-//			.and()
-//			.logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
-		// @formatter:on
 	}
 
-	// methode d'authentification
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// @formatter:off
-		//auth.inMemoryAuthentication()
-		//	.withUser("admin").password("{noop}admin").roles("ADMIN")
-		//	.and()
-		//	.withUser("user").password("{noop}user").roles("USER");
-		
-		//auth.jdbcAuthentication().dataSource(dataSource)
-		//	.usersByUsernameQuery("select username,password,enable from login where username=?")
-		//	.authoritiesByUsernameQuery("select username,role from login_role where username=?");
-		
 		auth.userDetailsService(authService);
-		
-		// @formatter:on
 	}
 
 	@Bean

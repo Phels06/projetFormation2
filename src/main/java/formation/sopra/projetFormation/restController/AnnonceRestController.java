@@ -3,7 +3,6 @@ package formation.sopra.projetFormation.restController;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.validation.Valid;
 

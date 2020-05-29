@@ -7,11 +7,17 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Embeddable
 public class PostulerKey implements Serializable {
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "id_person_ad_person", foreignKey = @ForeignKey(name = "person_ad_person_fk"))
 	private Personne personne;
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "id_person_ad_ad", foreignKey = @ForeignKey(name = "person_ad_ad_fk"))
 	private Annonce annonce;

@@ -90,18 +90,7 @@ public class PostulerRestController {
 		if (opt.isPresent()) {
 			Postuler postulerEnBase = opt.get();
 			postulerEnBase.setId(postuler.getId());
-			if(postuler.getDatePostuler() != null) {
-				postulerEnBase.setDatePostuler(postuler.getDatePostuler());}
-			if(postuler.getNote() != null) {
-				postulerEnBase.setNote(postuler.getNote());}
-			if (postuler.getTarif() != null) {
-				postulerEnBase.setTarif(postuler.getTarif());}
-			if (postuler.getMaitre() != null) {
-				postulerEnBase.setPromeneur(postuler.getPromeneur());}
-			if (postuler.getChiens() != null) {
-				postulerEnBase.setChiens(postuler.getChiens());}
-			if (postuler.getChiens() != null) {
-				postulerEnBase.setPostulers(postuler.getPostulers());}
+			postulerRepository.deleteById(id);
 			postulerEnBase = postulerRepository.save(postulerEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
