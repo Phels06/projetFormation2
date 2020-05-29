@@ -3,6 +3,7 @@ package formation.sopra.projetFormation.restController;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -39,12 +40,12 @@ public class AnnonceRestController {
 
 	@GetMapping({ "", "/" })
 	@JsonView(Views.Common.class)
-	public ResponseEntity<List<Annonce>> getAllSalle() {
+	public ResponseEntity<List<Annonce>> getAll() {
 		return new ResponseEntity<>(annonceRepository.findAll(), HttpStatus.OK);
 	}
 	
 	@PostMapping({ "", "/" })
-	public ResponseEntity<Void> addSalle(@Valid @RequestBody Annonce annonce, BindingResult br,
+	public ResponseEntity<Void> add(@Valid @RequestBody Annonce annonce, BindingResult br,
 			UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -89,11 +90,18 @@ public class AnnonceRestController {
 		Optional<Annonce> opt = annonceRepository.findById(id);
 		if (opt.isPresent()) {
 			Annonce annonceEnBase = opt.get();
-			annonceEnBase.setNom(annonce.getNom());
-			annonceEnBase.setCapacite(annonce.getCapacite());
-			if (annonce.getAdresse() != null) {
-				annonceEnBase.setAdresse(annonce.getAdresse());
-			}
+			if(annonce.getDateAnnonce() != null) {
+				annonceEnBase.setDateAnnonce(annonce.getDateAnnonce());}
+			if(annonce.getNote() != null) {
+				annonceEnBase.setNote(annonce.getNote());}
+			if (annonce.getTarif() != null) {
+				annonceEnBase.setTarif(annonce.getTarif());}
+			if (annonce.getMaitre() != null) {
+				annonceEnBase.setPromeneur(annonce.getPromeneur());}
+			if (annonce.getChiens() != null) {
+				annonceEnBase.setChiens(annonce.getChiens());}
+			if (annonce.getChiens() != null) {
+				annonceEnBase.setPostulers(annonce.getPostulers());}
 			annonceEnBase = annonceRepository.save(annonceEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
