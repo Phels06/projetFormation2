@@ -90,6 +90,7 @@ public class PostulerRestController {
 		if (opt.isPresent()) {
 			Postuler postulerEnBase = opt.get();
 			postulerEnBase.setId(postuler.getId());
+			postulerEnBase.setVersion(postuler.getVersion()+1);
 			postulerRepository.deleteById(id);
 			postulerEnBase = postulerRepository.save(postulerEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);

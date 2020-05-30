@@ -1,17 +1,16 @@
 package formation.sopra.projetFormation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import formation.sopra.projetFormation.entity.Adresse;
@@ -27,7 +26,8 @@ import formation.sopra.projetFormation.repository.PostulerRepository;
 import formation.sopra.projetFormation.service.PostulerService;
 
 @SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 public class TestPostuler {
 
 	@Autowired
@@ -77,23 +77,8 @@ public class TestPostuler {
 		postulerRepository.save(p);
 		assertNotNull(p.getId());
 		assertTrue(postulerRepository.findById(p.getId()).isPresent());
-
-		Annonce an2 = new Annonce();
-		annonceRepository.save(an2);
-
-		PostulerKey id = p.getId();
-		Postuler postuler = new Postuler(new PostulerKey(pe, an2));
-
-		p.setId(postuler.getId());
-		System.out.println(p.getVersion());
-		postulerRepository.deleteById(id);
-		System.out.println("avant save"+p.getVersion());
-		p = postulerRepository.save(p);
-		System.out.println("apres save"+p.getVersion());
-
-		assertNotNull(p.getId());
-		assertTrue(postulerRepository.findById(p.getId()).isPresent());
-		assertTrue(p.getId() == postuler.getId());
+		postulerRepository.deleteById(p.getId());
+		assertFalse(postulerRepository.findById(p.getId()).isPresent());
 
 	}
 

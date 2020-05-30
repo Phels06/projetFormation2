@@ -66,7 +66,7 @@ public class Annonce {
 	
 	@OneToOne()
 	@JoinColumn(name = "id_master", foreignKey = @ForeignKey(name = "ad_master_fk"))
-	@NotEmpty
+	//@NotEmpty
 	private Personne maitre;
 	
 	@OneToOne()

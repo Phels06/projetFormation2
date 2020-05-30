@@ -1,11 +1,11 @@
-package formation.sopra.projetFormation;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
-@RunWith(Suite.class)
-@SuiteClasses({ TestAnnonce.class, TestPostuler.class })
-public class TestsPhels {
-
-}
+//package formation.sopra.projetFormation;
+//
+//import org.junit.runner.RunWith;
+//import org.junit.runners.Suite;
+//import org.junit.runners.Suite.SuiteClasses;
+//
+//@RunWith(Suite.class)
+//@SuiteClasses({ TestAnnonce.class, TestPostuler.class })
+//public class TestsPhels {
+//
+//}
