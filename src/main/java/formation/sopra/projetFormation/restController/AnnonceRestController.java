@@ -30,10 +30,9 @@ import formation.sopra.projetFormation.entity.view.Views;
 import formation.sopra.projetFormation.repository.AnnonceRepository;
 import formation.sopra.projetFormation.repository.PostulerRepository;
 
-
 @RestController
 @RequestMapping("/rest/annonce")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class AnnonceRestController {
 
 	@Autowired
@@ -46,22 +45,33 @@ public class AnnonceRestController {
 	public ResponseEntity<List<Annonce>> getAll() {
 		return new ResponseEntity<>(annonceRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping({ "maitre/{id}", "maitre/{id}/" })
 	@JsonView(Views.Common.class)
 	public ResponseEntity<List<Annonce>> getAllByMaitre(@PathVariable("id") Integer id) {
-		return new ResponseEntity<>(annonceRepository.findParMaitre(id), HttpStatus.OK);
+		return new ResponseEntity<>(annonceRepository.findByMaitreSId(id), HttpStatus.OK);
 	}
 	
+	@GetMapping({ "promeneur/{id}", "promeneur/{id}/" })
+	@JsonView(Views.Common.class)
+	public ResponseEntity<List<Annonce>> getAllByPromeneur(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(annonceRepository.findByPromeneurSId(id), HttpStatus.OK);
+	}
+
 //	@GetMapping({ "personne/{id}", "personne/{id}/" })
 //	@JsonView(Views.AnnonceByPersonne.class)
 //	public ResponseEntity<List<Annonce>> getAllByPersonne(@PathVariable("id") Integer id) {
 //		return new ResponseEntity<>(annonceRepository.findByPersonne(id), HttpStatus.OK);
 //	}
-	
+
+	@GetMapping({ "ville/{id}", "ville/{id}/" })
+	@JsonView(Views.Common.class)
+	public ResponseEntity<List<Annonce>> getAllByVille(@PathVariable("ville") String ville) {
+		return new ResponseEntity<>(annonceRepository.findByVille(ville), HttpStatus.OK);
+	}
+
 	@PostMapping({ "", "/" })
-	public ResponseEntity<Void> add(@Valid @RequestBody Annonce annonce, BindingResult br,
-			UriComponentsBuilder uCB) {
+	public ResponseEntity<Void> add(@Valid @RequestBody Annonce annonce, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
@@ -74,7 +84,7 @@ public class AnnonceRestController {
 	}
 
 	@JsonView(Views.Common.class)
-	@GetMapping("/{id}")
+	@GetMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Annonce> findById(@PathVariable("id") Integer id) {
 		Optional<Annonce> opt = annonceRepository.findById(id);
 		if (opt.isPresent()) {
@@ -84,7 +94,7 @@ public class AnnonceRestController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		Optional<Annonce> opt = annonceRepository.findById(id);
 		if (opt.isPresent()) {
@@ -100,26 +110,33 @@ public class AnnonceRestController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody Annonce annonce, BindingResult br, @PathVariable("id") Integer id) {
-		if(br.hasErrors()) {
+	@PutMapping({ "/{id}", "/{id}/" })
+	public ResponseEntity<Void> update(@Valid @RequestBody Annonce annonce, BindingResult br,
+			@PathVariable("id") Integer id) {
+		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Optional<Annonce> opt = annonceRepository.findById(id);
 		if (opt.isPresent()) {
 			Annonce annonceEnBase = opt.get();
-			if(annonce.getDateAnnonce() != null) {
-				annonceEnBase.setDateAnnonce(annonce.getDateAnnonce());}
-			if(annonce.getNote() != null) {
-				annonceEnBase.setNote(annonce.getNote());}
+			if (annonce.getDateAnnonce() != null) {
+				annonceEnBase.setDateAnnonce(annonce.getDateAnnonce());
+			}
+			if (annonce.getNote() != null) {
+				annonceEnBase.setNote(annonce.getNote());
+			}
 			if (annonce.getTarif() != null) {
-				annonceEnBase.setTarif(annonce.getTarif());}
+				annonceEnBase.setTarif(annonce.getTarif());
+			}
 			if (annonce.getMaitre() != null) {
-				annonceEnBase.setPromeneur(annonce.getPromeneur());}
+				annonceEnBase.setPromeneur(annonce.getPromeneur());
+			}
 			if (annonce.getChiens() != null) {
-				annonceEnBase.setChiens(annonce.getChiens());}
+				annonceEnBase.setChiens(annonce.getChiens());
+			}
 			if (annonce.getChiens() != null) {
-				annonceEnBase.setPostulers(annonce.getPostulers());}
+				annonceEnBase.setPostulers(annonce.getPostulers());
+			}
 			annonceEnBase = annonceRepository.save(annonceEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
