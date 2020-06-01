@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -22,8 +23,7 @@ public class Inscription {
 	@JsonView(Views.Common.class)
 	@Email
 	private String mail;
-	@Pattern( regexp="^([+-])?[0-9]+([,.][0-9]{1,2})?", 
-			 message="mot de passe invalide. Il doit suivre ######,## ou #####.##")
+	@Pattern (regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\\S{8,50}$/")
 	@JsonView(Views.Common.class)
 	private String motDePasse;
 	private boolean enable;

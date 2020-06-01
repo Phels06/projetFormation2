@@ -20,10 +20,6 @@ public class PersonneService {
 
 	public boolean ajout(Personne personne) {
 		Boolean succes = true;
-		char caractereString;
-		Boolean majusculeFlag = false;
-		Boolean minusculeFlag = false;
-		Boolean numberFlag = false;
 		if (personne.getAdresse().getNumero() == null) {
 			succes = false;
 		}
@@ -48,31 +44,7 @@ public class PersonneService {
 		if (personne.getInscription().getMotDePasse().isEmpty()) {
 			succes = false;
 		}
-		// au moins 1 minuscule, 1 majuscule1 1 chiffre
-		if (succes == true) {
-			for (int i = 0; i < personne.getInscription().getMotDePasse().length(); i++) {
-				caractereString = personne.getInscription().getMotDePasse().charAt(i);
-				if (Character.isDigit(caractereString)) {
-					numberFlag = true;
-				} else if (Character.isUpperCase(caractereString)) {
-					majusculeFlag = true;
-				} else if (Character.isLowerCase(caractereString)) {
-					minusculeFlag = true;
-				}
-			}
-			if (numberFlag && majusculeFlag && minusculeFlag) {
-				succes = true;
-			} else {
-				succes = false;
-			}
-		}
 		if (personne.getInscription().getMail().isEmpty()) {
-			succes = false;
-		}
-		// test de l'email avec caract�re sp�cial, utilisation d'une regex
-		if (personne.getInscription().getMail().matches(regex) == true && succes) {
-			succes = true;
-		} else {
 			succes = false;
 		}
 		if (succes == true) {

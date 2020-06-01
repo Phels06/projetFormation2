@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.sopra.projetFormation.entity.view.Views;
@@ -25,7 +26,7 @@ public class LoginRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLoginRole")
 	private Integer id;
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "mail_person", foreignKey = @ForeignKey(name = "login_role_mail_person_fk"))
 	private Personne personne;

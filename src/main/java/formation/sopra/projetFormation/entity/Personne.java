@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -46,7 +48,7 @@ public class Personne {
 	@AttributeOverrides({
 			@AttributeOverride(name = "dateInscription", column = @Column(name = "inscription_date_person")),
 			@AttributeOverride(name = "mail", column = @Column(name = "mail_person", nullable = false)),
-			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 50, nullable = false)),
+			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 250, nullable = false)),
 			@AttributeOverride(name = "enable", column = @Column(name = "enable_person", nullable = false))})
 	private Inscription inscription;
 	@JsonView(Views.Common.class)
