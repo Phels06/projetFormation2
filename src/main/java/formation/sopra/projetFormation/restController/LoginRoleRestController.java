@@ -28,10 +28,9 @@ import formation.sopra.projetFormation.entity.LoginRole;
 import formation.sopra.projetFormation.entity.view.Views;
 import formation.sopra.projetFormation.repository.LoginRoleRepository;
 
-
 @RestController
 @RequestMapping("/rest/loginRole")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class LoginRoleRestController {
 
 	@Autowired
@@ -42,7 +41,7 @@ public class LoginRoleRestController {
 	public ResponseEntity<List<LoginRole>> getAll() {
 		return new ResponseEntity<>(loginRoleRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Void> add(@Valid @RequestBody LoginRole loginRole, BindingResult br,
 			UriComponentsBuilder uCB) {
@@ -58,7 +57,7 @@ public class LoginRoleRestController {
 	}
 
 	@JsonView(Views.Common.class)
-	@GetMapping("/{id}")
+	@GetMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<LoginRole> findById(@PathVariable("id") Integer id) {
 		Optional<LoginRole> opt = loginRoleRepository.findById(id);
 		if (opt.isPresent()) {
@@ -68,9 +67,7 @@ public class LoginRoleRestController {
 		}
 	}
 
-	
-
-	@DeleteMapping("/{id}")
+	@DeleteMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		Optional<LoginRole> opt = loginRoleRepository.findById(id);
 		if (opt.isPresent()) {
@@ -81,18 +78,21 @@ public class LoginRoleRestController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody LoginRole loginRole, BindingResult br, @PathVariable("id") Integer id) {
-		if(br.hasErrors()) {
+	@PutMapping({ "/{id}", "/{id}/" })
+	public ResponseEntity<Void> update(@Valid @RequestBody LoginRole loginRole, BindingResult br,
+			@PathVariable("id") Integer id) {
+		if (br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Optional<LoginRole> opt = loginRoleRepository.findById(id);
 		if (opt.isPresent()) {
 			LoginRole loginRoleEnBase = opt.get();
-			if(loginRole.getPersonne() != null) {
-				loginRoleEnBase.setPersonne(loginRole.getPersonne());}
-			if(loginRole.getRole() != null) {
-				loginRoleEnBase.setRole(loginRole.getRole());}
+			if (loginRole.getPersonne() != null) {
+				loginRoleEnBase.setPersonne(loginRole.getPersonne());
+			}
+			if (loginRole.getRole() != null) {
+				loginRoleEnBase.setRole(loginRole.getRole());
+			}
 			loginRoleEnBase = loginRoleRepository.save(loginRoleEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

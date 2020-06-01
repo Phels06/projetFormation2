@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +30,7 @@ import formation.sopra.projetFormation.repository.PostulerRepository;
 
 @RestController
 @RequestMapping("/rest/postuler")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class PostulerRestController {
 
 	@Autowired
@@ -42,10 +41,9 @@ public class PostulerRestController {
 	public ResponseEntity<List<Postuler>> getAll() {
 		return new ResponseEntity<>(postulerRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@PostMapping({ "", "/" })
-	public ResponseEntity<Void> add(@Valid @RequestBody Postuler postuler, BindingResult br,
-			UriComponentsBuilder uCB) {
+	public ResponseEntity<Void> add(@Valid @RequestBody Postuler postuler, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
@@ -58,7 +56,7 @@ public class PostulerRestController {
 	}
 
 	@JsonView(Views.Common.class)
-	@GetMapping("/{id}")
+	@GetMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Postuler> findById(@PathVariable("id") PostulerKey id) {
 		Optional<Postuler> opt = postulerRepository.findById(id);
 		if (opt.isPresent()) {
@@ -68,9 +66,7 @@ public class PostulerRestController {
 		}
 	}
 
-	
-
-	@DeleteMapping("/{id}")
+	@DeleteMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Void> delete(@PathVariable("id") PostulerKey id) {
 		Optional<Postuler> opt = postulerRepository.findById(id);
 		if (opt.isPresent()) {
@@ -81,7 +77,7 @@ public class PostulerRestController {
 		}
 	}
 
-//	@PutMapping("/{id}")
+//	@PutMapping({"/{id}","/{id}/"})
 //	public ResponseEntity<Void> update(@Valid @RequestBody Postuler postuler, BindingResult br, @PathVariable("id") PostulerKey id) {
 //		if(br.hasErrors()) {
 //			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
