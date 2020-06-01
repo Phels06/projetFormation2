@@ -1,6 +1,7 @@
 package formation.sopra.projetFormation.restController;
 
 import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+
+
 import formation.sopra.projetFormation.entity.Chien;
 import formation.sopra.projetFormation.entity.view.Views;
 import formation.sopra.projetFormation.repository.ChienRepository;
@@ -45,6 +48,19 @@ public class ChienRestController {
 		return new ResponseEntity<>(chienRepository.findAll(), HttpStatus.OK);
 	}
 	
+	@JsonView(Views.ChienWithAnnonce.class)
+	@GetMapping("/annonce")
+	public ResponseEntity<List<Chien>> findAllWithAnnonce() {
+		List<Chien> list = chienRepository.findAll();
+		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
+	}
+	
+	@JsonView(Views.ChienWithPersonne.class)
+	@GetMapping("/personne")
+	public ResponseEntity<List<Chien>> findAllWithPersonne() {
+		List<Chien> list = chienRepository.findAll();
+		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
+	}
 	
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Void> addChien(@Valid @RequestBody Chien chien, BindingResult br,
