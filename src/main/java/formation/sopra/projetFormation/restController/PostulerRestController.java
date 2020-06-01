@@ -81,20 +81,20 @@ public class PostulerRestController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody Postuler postuler, BindingResult br, @PathVariable("id") PostulerKey id) {
-		if(br.hasErrors()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		Optional<Postuler> opt = postulerRepository.findById(id);
-		if (opt.isPresent()) {
-			Postuler postulerEnBase = opt.get();
-			postulerEnBase.setId(postuler.getId());
-			postulerEnBase.setVersion(postuler.getVersion()+1);
-			postulerRepository.deleteById(id);
-			postulerEnBase = postulerRepository.save(postulerEnBase);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Void> update(@Valid @RequestBody Postuler postuler, BindingResult br, @PathVariable("id") PostulerKey id) {
+//		if(br.hasErrors()) {
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
+//		Optional<Postuler> opt = postulerRepository.findById(id);
+//		if (opt.isPresent()) {
+//			Postuler postulerEnBase = opt.get();
+//			postulerEnBase.setId(postuler.getId());
+//			postulerEnBase.setVersion(postuler.getVersion()+1);
+//			postulerRepository.deleteById(id);
+//			postulerEnBase = postulerRepository.save(postulerEnBase);
+//			return new ResponseEntity<>(HttpStatus.OK);
+//		}
+//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//	}
 }

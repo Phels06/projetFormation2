@@ -74,6 +74,7 @@ public class Annonce {
 	private Personne promeneur;
 	@OneToMany(mappedBy = "annonce")
 	private Set<Chien> chiens = new HashSet<>();
+	@JsonView(Views.AnnonceByPersonne.class)
 	@OneToMany(mappedBy = "id.annonce")
 	private List<Postuler> postulers;
 	@Version

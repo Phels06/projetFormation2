@@ -25,8 +25,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.sopra.projetFormation.entity.Annonce;
+import formation.sopra.projetFormation.entity.Postuler;
 import formation.sopra.projetFormation.entity.view.Views;
 import formation.sopra.projetFormation.repository.AnnonceRepository;
+import formation.sopra.projetFormation.repository.PostulerRepository;
 
 
 @RestController
@@ -36,12 +38,26 @@ public class AnnonceRestController {
 
 	@Autowired
 	private AnnonceRepository annonceRepository;
+	@Autowired
+	private PostulerRepository postulerRepository;
 
 	@GetMapping({ "", "/" })
 	@JsonView(Views.Common.class)
 	public ResponseEntity<List<Annonce>> getAll() {
 		return new ResponseEntity<>(annonceRepository.findAll(), HttpStatus.OK);
 	}
+	
+	@GetMapping({ "maitre/{id}", "maitre/{id}/" })
+	@JsonView(Views.Common.class)
+	public ResponseEntity<List<Annonce>> getAllByMaitre(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(annonceRepository.findParMaitre(id), HttpStatus.OK);
+	}
+	
+//	@GetMapping({ "personne/{id}", "personne/{id}/" })
+//	@JsonView(Views.AnnonceByPersonne.class)
+//	public ResponseEntity<List<Annonce>> getAllByPersonne(@PathVariable("id") Integer id) {
+//		return new ResponseEntity<>(annonceRepository.findByPersonne(id), HttpStatus.OK);
+//	}
 	
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Void> add(@Valid @RequestBody Annonce annonce, BindingResult br,
@@ -68,12 +84,15 @@ public class AnnonceRestController {
 		}
 	}
 
-	
-
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		Optional<Annonce> opt = annonceRepository.findById(id);
 		if (opt.isPresent()) {
+			if (!opt.get().getPostulers().isEmpty()) {
+				for (Postuler postuler : opt.get().getPostulers()) {
+					postulerRepository.deleteById(postuler.getId());
+				}
+			}
 			annonceRepository.deleteById(id);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {

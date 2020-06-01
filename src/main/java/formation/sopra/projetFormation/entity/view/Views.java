@@ -5,4 +5,12 @@ public class Views {
 	public static class Common {
 
 	}
+	
+//	public static class Delete extends Common {
+//
+//	}
+	
+	public static class AnnonceByPersonne extends Common {
+		
+	}
 }
