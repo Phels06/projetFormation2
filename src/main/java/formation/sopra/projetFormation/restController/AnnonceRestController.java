@@ -58,11 +58,12 @@ public class AnnonceRestController {
 		return new ResponseEntity<>(annonceRepository.findByPromeneurSId(id), HttpStatus.OK);
 	}
 
-//	@GetMapping({ "personne/{id}", "personne/{id}/" })
+	@GetMapping({ "personne/{id}", "personne/{id}/" })
 //	@JsonView(Views.AnnonceByPersonne.class)
-//	public ResponseEntity<List<Annonce>> getAllByPersonne(@PathVariable("id") Integer id) {
-//		return new ResponseEntity<>(annonceRepository.findByPersonne(id), HttpStatus.OK);
-//	}
+	@JsonView(Views.Common.class)
+	public ResponseEntity<List<Annonce>> getAllByPersonne(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(annonceRepository.findByPersonne(id), HttpStatus.OK);
+	}
 
 	@GetMapping({ "ville/{id}", "ville/{id}/" })
 	@JsonView(Views.Common.class)

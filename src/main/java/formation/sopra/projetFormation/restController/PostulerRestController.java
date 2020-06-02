@@ -23,9 +23,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import formation.sopra.projetFormation.entity.Annonce;
+import formation.sopra.projetFormation.entity.Personne;
 import formation.sopra.projetFormation.entity.Postuler;
 import formation.sopra.projetFormation.entity.PostulerKey;
 import formation.sopra.projetFormation.entity.view.Views;
+import formation.sopra.projetFormation.repository.AnnonceRepository;
+import formation.sopra.projetFormation.repository.PersonneRepository;
 import formation.sopra.projetFormation.repository.PostulerRepository;
 
 @RestController
@@ -35,6 +39,10 @@ public class PostulerRestController {
 
 	@Autowired
 	private PostulerRepository postulerRepository;
+	@Autowired
+	private PersonneRepository personneRepository;
+	@Autowired
+	private AnnonceRepository annonceRepository;
 
 	@GetMapping({ "", "/" })
 	@JsonView(Views.Common.class)
@@ -56,24 +64,38 @@ public class PostulerRestController {
 	}
 
 	@JsonView(Views.Common.class)
-	@GetMapping({ "/{id}", "/{id}/" })
-	public ResponseEntity<Postuler> findById(@PathVariable("id") PostulerKey id) {
-		Optional<Postuler> opt = postulerRepository.findById(id);
-		if (opt.isPresent()) {
-			return new ResponseEntity<Postuler>(opt.get(), HttpStatus.OK);
+	@GetMapping({ "/{id1}/{id2}", "/{id1}/{id2}/" })
+	public ResponseEntity<Postuler> findById(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
+		Optional<Personne> opt1 = personneRepository.findById(id1);
+		Optional<Annonce> opt2 = annonceRepository.findById(id2);
+		if (opt1.isPresent() && opt2.isPresent()) {
+			PostulerKey id = new PostulerKey(opt1.get(), opt2.get());
+			Optional<Postuler> opt = postulerRepository.findById(id);
+			if (opt.isPresent()) {
+				return new ResponseEntity<Postuler>(opt.get(), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@DeleteMapping({ "/{id}", "/{id}/" })
-	public ResponseEntity<Void> delete(@PathVariable("id") PostulerKey id) {
-		Optional<Postuler> opt = postulerRepository.findById(id);
-		if (opt.isPresent()) {
-			postulerRepository.deleteById(id);
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	@DeleteMapping({ "/{id1}/{id2}", "/{id1}/{id2}/" })
+	public ResponseEntity<Void> delete(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
+		Optional<Personne> opt1 = personneRepository.findById(id1);
+		Optional<Annonce> opt2 = annonceRepository.findById(id2);
+		if (opt1.isPresent() && opt2.isPresent()) {
+			PostulerKey id = new PostulerKey(opt1.get(), opt2.get());
+			Optional<Postuler> opt = postulerRepository.findById(id);
+			if (opt.isPresent()) {
+				postulerRepository.deleteById(id);
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			}
 		} else {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
