@@ -52,7 +52,6 @@ public class Postuler {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + version;
 		return result;
 	}
 
@@ -69,8 +68,6 @@ public class Postuler {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (version != other.version)
 			return false;
 		return true;
 	}

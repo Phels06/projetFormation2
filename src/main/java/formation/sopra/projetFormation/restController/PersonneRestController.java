@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,7 @@ public class PersonneRestController {
 
 	@Autowired
 	LoginRoleRepository loginRoleRepository;
-	
+
 	@Autowired
 	private PasswordEncoder PasswordEncoder;
 
@@ -71,9 +70,9 @@ public class PersonneRestController {
 		if (br.hasErrors()) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		//on vérifie si l'email est unique
-		Optional<Personne> optional=personneRepository.findByMail(personne.getInscription().getMail());
-		if(optional.isPresent()) {
+		// on vérifie si l'email est unique
+		Optional<Personne> optional = personneRepository.findByMail(personne.getInscription().getMail());
+		if (optional.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		// au moins 1 minuscule, 1 majuscule1 1 chiffre dans le mot de passe
@@ -103,15 +102,15 @@ public class PersonneRestController {
 		personne.getInscription().setEnable(true);
 		personne.getInscription().setMotDePasse(PasswordEncoder.encode(personne.getInscription().getMotDePasse()));
 		personneService.ajout(personne);
-		LoginRole role=new LoginRole();
+		LoginRole role = new LoginRole();
 		role.setRole(Role.ROLE_USER);
 		role.setPersonne(personne);
 		loginRoleRepository.save(role);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
-	
 	// rechercher une personne selon son id
+	@JsonView(Views.Common.class)
 	@GetMapping("personne/{id}")
 	public ResponseEntity<Personne> findById(@PathVariable("id") Integer id) {
 		Optional<Personne> opt = personneRepository.findById(id);
@@ -121,7 +120,6 @@ public class PersonneRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	
 	// supprimer une personne selon son id
 	@DeleteMapping("personne/delete/{id}")
 	public ResponseEntity<Void> deletePersonne(@PathVariable("id") Integer id) {
@@ -134,7 +132,6 @@ public class PersonneRestController {
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 
-	
 	// mise à jour d'une personne selon son id
 	@PutMapping("personne/maj/{id}")
 	public ResponseEntity<Void> updatePersonne(@Valid @RequestBody Personne personne, BindingResult br,
@@ -166,12 +163,12 @@ public class PersonneRestController {
 				personneEnBase.getAdresse().setVille(personne.getAdresse().getVille());
 			}
 			if (personne.getInscription() != null) {
-				//email
+				// email
 				if (!personne.getInscription().getMail().matches(regex)) {
 					return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 				}
 				personneEnBase.getInscription().setMail(personne.getInscription().getMail());
-				//taille du mot de passe
+				// taille du mot de passe
 				if (!br.hasErrors() && personne.getInscription().getMotDePasse().length() < 8) {
 					return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 				}
@@ -189,7 +186,8 @@ public class PersonneRestController {
 				if (!numberFlag || !majusculeFlag || !minusculeFlag) {
 					return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 				}
-				personneEnBase.getInscription().setMotDePasse(PasswordEncoder.encode(personne.getInscription().getMotDePasse()));
+				personneEnBase.getInscription()
+						.setMotDePasse(PasswordEncoder.encode(personne.getInscription().getMotDePasse()));
 			}
 
 			personneEnBase = personneRepository.save(personneEnBase);
@@ -198,31 +196,32 @@ public class PersonneRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	
 	// recherche d'un email déja existant
+	@JsonView(Views.Common.class)
 	@GetMapping("/personne/login/{mail}")
-	public ResponseEntity<Boolean> loginDispo(@PathVariable("mail") String mail){
-		Optional<Personne>opt=personneRepository.findByMail(mail);
-		if(opt.isPresent()) {
-			return new ResponseEntity<>(false,HttpStatus.OK);
+	public ResponseEntity<Boolean> loginDispo(@PathVariable("mail") String mail) {
+		Optional<Personne> opt = personneRepository.findByMail(mail);
+		if (opt.isPresent()) {
+			return new ResponseEntity<>(false, HttpStatus.OK);
 		}
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
-	
+
 	// login
 	@GetMapping("login")
-	public ResponseEntity<Void> login(){
+	public ResponseEntity<Void> login() {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	// recupere id via mail
-		@GetMapping("/personne/mail/{mail}")
-		public ResponseEntity<Personne> findByMail(@PathVariable("mail") String mail){
-			Optional<Personne>opt=personneRepository.findByMail(mail);
-			if (opt.isPresent()) {
-				return new ResponseEntity<Personne>(opt.get(), HttpStatus.OK);
-			}
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	@JsonView(Views.Common.class)
+	@GetMapping("/personne/mail/{mail}")
+	public ResponseEntity<Personne> findByMail(@PathVariable("mail") String mail) {
+		Optional<Personne> opt = personneRepository.findByMail(mail);
+		if (opt.isPresent()) {
+			return new ResponseEntity<Personne>(opt.get(), HttpStatus.OK);
 		}
-	
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
 }
