@@ -209,4 +209,10 @@ public class PersonneRestController {
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
 	
+	// login
+	@GetMapping("login")
+	public ResponseEntity<Void> login(){
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 }
