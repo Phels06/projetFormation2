@@ -86,12 +86,4 @@ public class ChienService {
 	}
 	
 	
-	public Chien rechercheTousParMaitre(Integer id) {
-		Optional<Chien> opt = chienRepository.findByIdWithPersonne(id);
-		if (opt.isPresent()) {
-			return opt.get();
-		}
-		throw new IllegalArgumentException();
-	}
-
 }

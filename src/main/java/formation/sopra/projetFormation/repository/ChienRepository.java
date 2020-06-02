@@ -17,7 +17,7 @@ public interface ChienRepository extends JpaRepository<Chien, Integer> {
 	@Query("select c from Chien c where c.id=:id")
 	Optional<Chien> findByKey(@Param("id") Integer id);
 	
-	@Query("select c from Chien c left join fetch c.personne p where c.id=:id")
-	Optional<Chien> findByIdWithPersonne(@Param("id") Integer id);
+	@Query("select c from Chien c left join fetch c.annonce p where p.id=:id")
+	List<Chien> findChienWithAnnonce(@Param("id") Integer id);
 	
 }

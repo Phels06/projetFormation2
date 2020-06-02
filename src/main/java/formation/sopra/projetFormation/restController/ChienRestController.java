@@ -25,8 +25,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-
-
 import formation.sopra.projetFormation.entity.Chien;
 import formation.sopra.projetFormation.entity.view.Views;
 import formation.sopra.projetFormation.repository.ChienRepository;
@@ -43,7 +41,7 @@ public class ChienRestController {
 	
 	
 	@GetMapping({ "", "/" })
-	@JsonView(Views.ChienWithAnnonce.class)
+	@JsonView(Views.ChienWithPersonne.class)
 	public ResponseEntity<List<Chien>> getAllChien() {
 		return new ResponseEntity<>(chienRepository.findAll(), HttpStatus.OK);
 	}
@@ -53,6 +51,12 @@ public class ChienRestController {
 	public ResponseEntity<List<Chien>> findAllOnlyChien() {
 		List<Chien> list = chienRepository.findAll();
 		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
+	}
+	
+	@GetMapping({ "annonce/{id}", "annonce/{id}/" })
+	@JsonView(Views.ChienWithPersonne.class)
+	public ResponseEntity<List<Chien>> getChienByPersonne(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(chienRepository.findChienWithAnnonce(id), HttpStatus.OK);
 	}
 	
 	
@@ -71,7 +75,7 @@ public class ChienRestController {
 	}
 	
 	
-	@JsonView(Views.ChienWithAnnonce.class)
+	@JsonView(Views.ChienWithPersonne.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Chien> findById(@PathVariable("id") Integer id) {
 		Optional<Chien> opt = chienRepository.findById(id);
@@ -100,7 +104,7 @@ public class ChienRestController {
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		Optional<Chien> opt = chienRepository.findById(chien.getId());
+		Optional<Chien> opt = chienRepository.findById(id);
 		if (opt.isPresent()) {
 			Chien chienEnBase = opt.get();
 			if (chien.getSurnom() != null) {
@@ -122,11 +126,10 @@ public class ChienRestController {
 				chienEnBase.setRace(chien.getRace());
 			}
 			if (chien.getAnnonce() != null) {
-				chienEnBase.setAnnonce(chien.getAnnonce());
-			}
-			if (chien.getPersonne() != null) {
-				chienEnBase.setPersonne(chien.getPersonne());
-			}
+					chienEnBase.getAnnonce().setId(chien.getAnnonce().getId());
+					chienEnBase.getAnnonce().setDateAnnonce(chien.getAnnonce().getDateAnnonce());	
+				}
+				
 			chienRepository.save(chienEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

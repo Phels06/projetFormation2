@@ -148,15 +148,5 @@ public class TestChien {
 		assertEquals(c1.getSexeChien(), SexeChien.M);
 	}
 
-//	@Test
-//	@Transactional
-//	@Rollback(true)
-//	public void testServiceChienRechercheParPersonne() {
-//		Chien c1 = new Chien("chien", SexeChien.F, 10, "photo", 5, "bulldog", 0);
-//		c1.setPersonne(new Personne());
-//		c1.setAnnonce(new Annonce());
-//		chienService.ajout(c1);
-//		assertTrue(chienService.rechercheTousParMaitre(c1.getPersonne().getId()) != null);
-//	}
 
 }
