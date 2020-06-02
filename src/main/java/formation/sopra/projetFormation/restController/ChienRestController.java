@@ -48,12 +48,12 @@ public class ChienRestController {
 		return new ResponseEntity<>(chienRepository.findAll(), HttpStatus.OK);
 	}
 	
-//	@JsonView(Views.ChienWithAnnonce.class)
-//	@GetMapping("/personne/annonce")
-//	public ResponseEntity<List<Chien>> findAllWithAnnonce() {
-//		List<Chien> list = chienRepository.findAll();
-//		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
-//	}
+	@JsonView(Views.Common.class)
+	@GetMapping("/only")
+	public ResponseEntity<List<Chien>> findAllOnlyChien() {
+		List<Chien> list = chienRepository.findAll();
+		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
+	}
 	
 	
 	@PostMapping({ "", "/" })
