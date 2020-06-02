@@ -78,7 +78,6 @@ public class Chien {
 		this.race = race;
 		this.version = version;
 	}
-	
 
 	public Chien(Integer id, String surnom, SexeChien sexeChien, Integer age, String photo, Integer poids, String race,
 			Annonce annonce, Personne personne, int version) {
@@ -179,7 +178,6 @@ public class Chien {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + version;
 		return result;
 	}
 
@@ -196,8 +194,6 @@ public class Chien {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (version != other.version)
 			return false;
 		return true;
 	}
