@@ -3,17 +3,26 @@ package formation.sopra.projetFormation.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.projetFormation.entity.view.Views;
+
 @Embeddable
 public class Tarif {
+	@JsonView(Views.Common.class)
 	@Column(name = "number_of_dogs")
 	private Integer nbChiens;
 	@Column(name = "number_of_hours")
+	@JsonView(Views.Common.class)
 	private Integer nbHeures;
 	@Column(name = "price_in_respect_to_dog_in_respect_to_hour")
+	@JsonView(Views.Common.class)
 	private Integer prixIRTchienIRTheure;
 	@Column(name = "tax")
+	@JsonView(Views.Common.class)
 	private Integer taxe;
 	@Column(name = "total_price")
+	@JsonView(Views.Common.class)
 	private Integer prixTotal;
 
 	public Tarif() {

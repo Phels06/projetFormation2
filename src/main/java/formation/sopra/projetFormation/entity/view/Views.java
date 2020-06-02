@@ -11,10 +11,6 @@ public class Views {
 
 	}
 
-	public static class AnnonceByPersonne extends Common {
-
-	}
-
 	public static class ChienWithAnnonce extends Common {
 
 	}

@@ -67,7 +67,7 @@ public class AnnonceRestController {
 
 	@GetMapping({ "ville/{id}", "ville/{id}/" })
 	@JsonView(Views.CommonAnnonce.class)
-	public ResponseEntity<List<Annonce>> getAllByVille(@PathVariable("ville") String ville) {
+	public ResponseEntity<List<Annonce>> getAllByVille(@PathVariable("id") String ville) {
 		return new ResponseEntity<>(annonceRepository.findByVille(ville), HttpStatus.OK);
 	}
 
@@ -84,7 +84,8 @@ public class AnnonceRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@JsonView(Views.Common.class)
+//	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	@GetMapping({ "/{id}", "/{id}/" })
 	public ResponseEntity<Annonce> findById(@PathVariable("id") Integer id) {
 		Optional<Annonce> opt = annonceRepository.findById(id);
