@@ -47,35 +47,35 @@ public class PostulerKey implements Serializable {
 		this.annonce = annonce;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((annonce == null) ? 0 : annonce.hashCode());
-		result = prime * result + ((personne == null) ? 0 : personne.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PostulerKey other = (PostulerKey) obj;
-		if (annonce == null) {
-			if (other.annonce != null)
-				return false;
-		} else if (!annonce.equals(other.annonce))
-			return false;
-		if (personne == null) {
-			if (other.personne != null)
-				return false;
-		} else if (!personne.equals(other.personne))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((annonce == null) ? 0 : annonce.hashCode());
+//		result = prime * result + ((personne == null) ? 0 : personne.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		PostulerKey other = (PostulerKey) obj;
+//		if (annonce == null) {
+//			if (other.annonce != null)
+//				return false;
+//		} else if (!annonce.equals(other.annonce))
+//			return false;
+//		if (personne == null) {
+//			if (other.personne != null)
+//				return false;
+//		} else if (!personne.equals(other.personne))
+//			return false;
+//		return true;
+//	}
 
 }

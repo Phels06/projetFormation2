@@ -44,17 +44,17 @@ public class Annonce {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAnnonce")
 	@Column(name = "id_ad")
 	private Integer id;
-	
+
 	@JsonView(Views.Common.class)
 	@Column(name = "date_ad")
 	@Temporal(TemporalType.DATE)
 	@FutureOrPresent
 	private Date dateAnnonce;
-	
+
 	@JsonView(Views.Common.class)
 	@Enumerated(EnumType.STRING)
 	private Note note;
-	
+
 	@JsonView(Views.Common.class)
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "nbChiens", column = @Column(name = "number_of_dogs")),
@@ -63,18 +63,20 @@ public class Annonce {
 			@AttributeOverride(name = "taxe", column = @Column(name = "tax")),
 			@AttributeOverride(name = "prixTotal", column = @Column(name = "total_price")) })
 	private Tarif tarif;
-	
+
 	@OneToOne()
 	@JoinColumn(name = "id_master", foreignKey = @ForeignKey(name = "ad_master_fk"))
-	//@NotEmpty
+	// @NotEmpty
+	@JsonView(Views.CommonAnnonce.class)
 	private Personne maitre;
-	
+
 	@OneToOne()
+	@JsonView(Views.CommonAnnonce.class)
 	@JoinColumn(name = "id_walker", foreignKey = @ForeignKey(name = "ad_walker_fk"))
 	private Personne promeneur;
 	@OneToMany(mappedBy = "annonce")
 	private Set<Chien> chiens = new HashSet<>();
-	@JsonView(Views.AnnonceByPersonne.class)
+	@JsonView(Views.CommonAnnonce.class)
 	@OneToMany(mappedBy = "id.annonce")
 	private List<Postuler> postulers;
 	@Version
@@ -166,10 +168,6 @@ public class Annonce {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((maitre == null) ? 0 : maitre.hashCode());
-		result = prime * result + ((postulers == null) ? 0 : postulers.hashCode());
-		result = prime * result + ((promeneur == null) ? 0 : promeneur.hashCode());
-		result = prime * result + version;
 		return result;
 	}
 
@@ -186,23 +184,6 @@ public class Annonce {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (maitre == null) {
-			if (other.maitre != null)
-				return false;
-		} else if (!maitre.equals(other.maitre))
-			return false;
-		if (postulers == null) {
-			if (other.postulers != null)
-				return false;
-		} else if (!postulers.equals(other.postulers))
-			return false;
-		if (promeneur == null) {
-			if (other.promeneur != null)
-				return false;
-		} else if (!promeneur.equals(other.promeneur))
-			return false;
-		if (version != other.version)
 			return false;
 		return true;
 	}
