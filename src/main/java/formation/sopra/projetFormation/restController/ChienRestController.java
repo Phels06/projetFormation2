@@ -43,24 +43,18 @@ public class ChienRestController {
 	
 	
 	@GetMapping({ "", "/" })
-	@JsonView(Views.Common.class)
+	@JsonView(Views.ChienWithAnnonce.class)
 	public ResponseEntity<List<Chien>> getAllChien() {
 		return new ResponseEntity<>(chienRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@JsonView(Views.ChienWithAnnonce.class)
-	@GetMapping("/annonce")
-	public ResponseEntity<List<Chien>> findAllWithAnnonce() {
-		List<Chien> list = chienRepository.findAll();
-		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
-	}
+//	@JsonView(Views.ChienWithAnnonce.class)
+//	@GetMapping("/personne/annonce")
+//	public ResponseEntity<List<Chien>> findAllWithAnnonce() {
+//		List<Chien> list = chienRepository.findAll();
+//		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
+//	}
 	
-	@JsonView(Views.ChienWithPersonne.class)
-	@GetMapping("/personne")
-	public ResponseEntity<List<Chien>> findAllWithPersonne() {
-		List<Chien> list = chienRepository.findAll();
-		return new ResponseEntity<List<Chien>>(list, HttpStatus.OK);	
-	}
 	
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Void> addChien(@Valid @RequestBody Chien chien, BindingResult br,
@@ -77,7 +71,7 @@ public class ChienRestController {
 	}
 	
 	
-	@JsonView(Views.Common.class)
+	@JsonView(Views.ChienWithAnnonce.class)
 	@GetMapping("/{id}")
 	public ResponseEntity<Chien> findById(@PathVariable("id") Integer id) {
 		Optional<Chien> opt = chienRepository.findById(id);

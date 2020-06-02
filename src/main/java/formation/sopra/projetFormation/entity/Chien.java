@@ -56,7 +56,7 @@ public class Chien {
 	private Annonce annonce;
 	@ManyToOne
 	@JoinColumn(name = "id_person", foreignKey = @ForeignKey(name = "dog_person_fk"))
-	@JsonView(Views.ChienWithPersonne.class)
+	@JsonView(Views.ChienWithAnnonce.class)
 	private Personne personne;
 	@Version
 	private int version;
