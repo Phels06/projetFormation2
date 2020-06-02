@@ -19,6 +19,7 @@ public class AuthService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println(username);
 		Optional<Personne> opt = loginRepository.findByMailWithRoles(username);
 		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException("utlisateur inconnu");
