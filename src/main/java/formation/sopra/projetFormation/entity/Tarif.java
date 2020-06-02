@@ -67,53 +67,53 @@ public class Tarif {
 		this.prixTotal = prixTotal;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nbChiens == null) ? 0 : nbChiens.hashCode());
-		result = prime * result + ((nbHeures == null) ? 0 : nbHeures.hashCode());
-		result = prime * result + ((prixIRTchienIRTheure == null) ? 0 : prixIRTchienIRTheure.hashCode());
-		result = prime * result + ((prixTotal == null) ? 0 : prixTotal.hashCode());
-		result = prime * result + ((taxe == null) ? 0 : taxe.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tarif other = (Tarif) obj;
-		if (nbChiens == null) {
-			if (other.nbChiens != null)
-				return false;
-		} else if (!nbChiens.equals(other.nbChiens))
-			return false;
-		if (nbHeures == null) {
-			if (other.nbHeures != null)
-				return false;
-		} else if (!nbHeures.equals(other.nbHeures))
-			return false;
-		if (prixIRTchienIRTheure == null) {
-			if (other.prixIRTchienIRTheure != null)
-				return false;
-		} else if (!prixIRTchienIRTheure.equals(other.prixIRTchienIRTheure))
-			return false;
-		if (prixTotal == null) {
-			if (other.prixTotal != null)
-				return false;
-		} else if (!prixTotal.equals(other.prixTotal))
-			return false;
-		if (taxe == null) {
-			if (other.taxe != null)
-				return false;
-		} else if (!taxe.equals(other.taxe))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((nbChiens == null) ? 0 : nbChiens.hashCode());
+//		result = prime * result + ((nbHeures == null) ? 0 : nbHeures.hashCode());
+//		result = prime * result + ((prixIRTchienIRTheure == null) ? 0 : prixIRTchienIRTheure.hashCode());
+//		result = prime * result + ((prixTotal == null) ? 0 : prixTotal.hashCode());
+//		result = prime * result + ((taxe == null) ? 0 : taxe.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Tarif other = (Tarif) obj;
+//		if (nbChiens == null) {
+//			if (other.nbChiens != null)
+//				return false;
+//		} else if (!nbChiens.equals(other.nbChiens))
+//			return false;
+//		if (nbHeures == null) {
+//			if (other.nbHeures != null)
+//				return false;
+//		} else if (!nbHeures.equals(other.nbHeures))
+//			return false;
+//		if (prixIRTchienIRTheure == null) {
+//			if (other.prixIRTchienIRTheure != null)
+//				return false;
+//		} else if (!prixIRTchienIRTheure.equals(other.prixIRTchienIRTheure))
+//			return false;
+//		if (prixTotal == null) {
+//			if (other.prixTotal != null)
+//				return false;
+//		} else if (!prixTotal.equals(other.prixTotal))
+//			return false;
+//		if (taxe == null) {
+//			if (other.taxe != null)
+//				return false;
+//		} else if (!taxe.equals(other.taxe))
+//			return false;
+//		return true;
+//	}
 
 }

@@ -85,35 +85,35 @@ public class Inscription {
 		this.roles = roles;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
-		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Inscription other = (Inscription) obj;
-		if (mail == null) {
-			if (other.mail != null)
-				return false;
-		} else if (!mail.equals(other.mail))
-			return false;
-		if (motDePasse == null) {
-			if (other.motDePasse != null)
-				return false;
-		} else if (!motDePasse.equals(other.motDePasse))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
+//		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Inscription other = (Inscription) obj;
+//		if (mail == null) {
+//			if (other.mail != null)
+//				return false;
+//		} else if (!mail.equals(other.mail))
+//			return false;
+//		if (motDePasse == null) {
+//			if (other.motDePasse != null)
+//				return false;
+//		} else if (!motDePasse.equals(other.motDePasse))
+//			return false;
+//		return true;
+//	}
 
 }

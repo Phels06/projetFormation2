@@ -21,11 +21,9 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
-
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.sopra.projetFormation.entity.view.Views;
-
 
 @Entity
 @Table(name = "person")
@@ -49,7 +47,7 @@ public class Personne {
 			@AttributeOverride(name = "dateInscription", column = @Column(name = "inscription_date_person")),
 			@AttributeOverride(name = "mail", column = @Column(name = "mail_person", nullable = false)),
 			@AttributeOverride(name = "motDePasse", column = @Column(name = "password_person", length = 250, nullable = false)),
-			@AttributeOverride(name = "enable", column = @Column(name = "enable_person", nullable = false))})
+			@AttributeOverride(name = "enable", column = @Column(name = "enable_person", nullable = false)) })
 	private Inscription inscription;
 	@JsonView(Views.Common.class)
 	@Column(name = "title", length = 4)
@@ -80,7 +78,7 @@ public class Personne {
 	}
 
 	public Personne(Integer id, String prenom, String nom) {
-		this.id=id;
+		this.id = id;
 		this.prenom = prenom;
 		this.nom = nom;
 	}
@@ -223,17 +221,7 @@ public class Personne {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((annoncesPoste == null) ? 0 : annoncesPoste.hashCode());
-		result = prime * result + ((annoncesRepondu == null) ? 0 : annoncesRepondu.hashCode());
-		result = prime * result + ((avis == null) ? 0 : avis.hashCode());
-		result = prime * result + ((civilite == null) ? 0 : civilite.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((inscription == null) ? 0 : inscription.hashCode());
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + ((postulers == null) ? 0 : postulers.hashCode());
-		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + version;
 		return result;
 	}
 
@@ -246,54 +234,10 @@ public class Personne {
 		if (getClass() != obj.getClass())
 			return false;
 		Personne other = (Personne) obj;
-		if (adresse == null) {
-			if (other.adresse != null)
-				return false;
-		} else if (!adresse.equals(other.adresse))
-			return false;
-		if (annoncesPoste == null) {
-			if (other.annoncesPoste != null)
-				return false;
-		} else if (!annoncesPoste.equals(other.annoncesPoste))
-			return false;
-		if (annoncesRepondu == null) {
-			if (other.annoncesRepondu != null)
-				return false;
-		} else if (!annoncesRepondu.equals(other.annoncesRepondu))
-			return false;
-		if (avis == null) {
-			if (other.avis != null)
-				return false;
-		} else if (!avis.equals(other.avis))
-			return false;
-		if (civilite != other.civilite)
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (inscription == null) {
-			if (other.inscription != null)
-				return false;
-		} else if (!inscription.equals(other.inscription))
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (postulers == null) {
-			if (other.postulers != null)
-				return false;
-		} else if (!postulers.equals(other.postulers))
-			return false;
-		if (prenom == null) {
-			if (other.prenom != null)
-				return false;
-		} else if (!prenom.equals(other.prenom))
-			return false;
-		if (version != other.version)
 			return false;
 		return true;
 	}

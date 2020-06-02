@@ -41,32 +41,32 @@ public class AnnonceRestController {
 	private PostulerRepository postulerRepository;
 
 	@GetMapping({ "", "/" })
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	public ResponseEntity<List<Annonce>> getAll() {
 		return new ResponseEntity<>(annonceRepository.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping({ "maitre/{id}", "maitre/{id}/" })
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	public ResponseEntity<List<Annonce>> getAllByMaitre(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(annonceRepository.findByMaitreSId(id), HttpStatus.OK);
 	}
 	
 	@GetMapping({ "promeneur/{id}", "promeneur/{id}/" })
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	public ResponseEntity<List<Annonce>> getAllByPromeneur(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(annonceRepository.findByPromeneurSId(id), HttpStatus.OK);
 	}
 
 	@GetMapping({ "personne/{id}", "personne/{id}/" })
 //	@JsonView(Views.AnnonceByPersonne.class)
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	public ResponseEntity<List<Annonce>> getAllByPersonne(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(annonceRepository.findByPersonne(id), HttpStatus.OK);
 	}
 
 	@GetMapping({ "ville/{id}", "ville/{id}/" })
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonAnnonce.class)
 	public ResponseEntity<List<Annonce>> getAllByVille(@PathVariable("ville") String ville) {
 		return new ResponseEntity<>(annonceRepository.findByVille(ville), HttpStatus.OK);
 	}

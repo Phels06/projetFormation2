@@ -7,9 +7,9 @@ public class Views {
 
 	}
 
-//	public static class Delete extends Common {
-//
-//	}
+	public static class CommonAnnonce extends Common {
+
+	}
 
 	public static class AnnonceByPersonne extends Common {
 
