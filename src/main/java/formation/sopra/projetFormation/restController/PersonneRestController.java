@@ -54,7 +54,7 @@ public class PersonneRestController {
 	// lister les personnes qui sont inscrites
 	@JsonView(Views.Common.class)
 	@GetMapping({ "personne", "personne/" })
-	public ResponseEntity<List<Personne>> finAll() {
+	public ResponseEntity<List<Personne>> findAll() {
 		return new ResponseEntity<List<Personne>>(personneRepository.findAll(), HttpStatus.OK);
 	}
 
@@ -214,5 +214,15 @@ public class PersonneRestController {
 	public ResponseEntity<Void> login(){
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	// recupere id via mail
+		@GetMapping("/personne/mail/{mail}")
+		public ResponseEntity<Personne> findByMail(@PathVariable("mail") String mail){
+			Optional<Personne>opt=personneRepository.findByMail(mail);
+			if (opt.isPresent()) {
+				return new ResponseEntity<Personne>(opt.get(), HttpStatus.OK);
+			}
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	
 }
