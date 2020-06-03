@@ -75,6 +75,7 @@ public class Annonce {
 	@JoinColumn(name = "id_walker", foreignKey = @ForeignKey(name = "ad_walker_fk"))
 	private Personne promeneur;
 	@OneToMany(mappedBy = "annonce")
+	@JsonView(Views.CommonAnnonce.class)
 	private Set<Chien> chiens = new HashSet<>();
 	@JsonView(Views.CommonAnnonce.class)
 	@OneToMany(mappedBy = "id.annonce")
