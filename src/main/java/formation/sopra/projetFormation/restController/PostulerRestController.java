@@ -57,13 +57,13 @@ public class PostulerRestController {
 		}
 		postulerRepository.save(postuler);
 
-		URI uri = uCB.path("/rest/postuler/{id}").buildAndExpand(postuler.getId()).toUri();
+		URI uri = uCB.path("/rest/postuler/{id1}/{id2}").buildAndExpand(postuler.getId().getPersonne().getId(),postuler.getId().getAnnonce().getId()).toUri();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uri);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonPostuler.class)
 	@GetMapping({ "/{id1}/{id2}", "/{id1}/{id2}/" })
 	public ResponseEntity<Postuler> findById(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
 		Optional<Personne> opt1 = personneRepository.findById(id1);
@@ -71,6 +71,7 @@ public class PostulerRestController {
 		if (opt1.isPresent() && opt2.isPresent()) {
 			PostulerKey id = new PostulerKey(opt1.get(), opt2.get());
 			Optional<Postuler> opt = postulerRepository.findById(id);
+//			Optional<Postuler> opt = postulerRepository.findByIds(id1, id2);
 			if (opt.isPresent()) {
 				return new ResponseEntity<Postuler>(opt.get(), HttpStatus.OK);
 			} else {

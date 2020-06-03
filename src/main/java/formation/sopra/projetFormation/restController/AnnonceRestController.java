@@ -136,7 +136,7 @@ public class AnnonceRestController {
 			if (annonce.getChiens() != null) {
 				annonceEnBase.setChiens(annonce.getChiens());
 			}
-			if (annonce.getChiens() != null) {
+			if (annonce.getPostulers() != null) {
 				annonceEnBase.setPostulers(annonce.getPostulers());
 			}
 			annonceEnBase = annonceRepository.save(annonceEnBase);
