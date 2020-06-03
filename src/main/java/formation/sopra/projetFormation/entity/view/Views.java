@@ -10,6 +10,10 @@ public class Views {
 	public static class CommonAnnonce extends Common {
 
 	}
+	
+	public static class CommonPostuler extends Common {
+
+	}
 
 	public static class ChienWithAnnonce extends Common {
 

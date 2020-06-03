@@ -17,7 +17,7 @@ public class PostulerKey implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_person_ad_person", foreignKey = @ForeignKey(name = "person_ad_person_fk"))
 	private Personne personne;
-	@JsonView(Views.Common.class)
+	@JsonView(Views.CommonPostuler.class)
 	@ManyToOne
 	@JoinColumn(name = "id_person_ad_ad", foreignKey = @ForeignKey(name = "person_ad_ad_fk"))
 	private Annonce annonce;
