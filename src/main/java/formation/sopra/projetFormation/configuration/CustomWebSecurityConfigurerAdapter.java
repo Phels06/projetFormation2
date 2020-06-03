@@ -30,17 +30,14 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).anonymous()
 			.and()
 			.csrf().disable()
-			.authorizeRequests().antMatchers("/rest/home").permitAll()
+			.authorizeRequests().antMatchers("/rest/email/**","/rest/login","/rest/personne","/rest/personne/","/rest/personne/login/**","/rest/personne/mail/**","/rest/personne/","/rest/login","/rest/login/**","/rest/connexion").permitAll()
 			.and()
-			.authorizeRequests().antMatchers("/rest/inscription","/rest/inscription/").permitAll()
+			.authorizeRequests().antMatchers(HttpMethod.POST,"/rest/inscription").permitAll()
 			.and()
-			.authorizeRequests().antMatchers("/rest/connexion").permitAll()
-			.and()
-			.authorizeRequests().antMatchers("/rest/personne/login/**").permitAll()
-			.and()
-			.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic()
-			.and()
-			.authorizeRequests().anyRequest().permitAll();
+			.authorizeRequests().antMatchers(HttpMethod.POST,"/rest/inscription/").permitAll()
+			.anyRequest().authenticated().and().httpBasic();
+	//		.and()
+	//		.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic();
 	}
 
 	@Override
