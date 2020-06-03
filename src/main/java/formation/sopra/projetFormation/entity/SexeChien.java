@@ -3,17 +3,17 @@ package formation.sopra.projetFormation.entity;
 public enum SexeChien {
 	F("Feminin"), M("Masculin");
 
-	private String sexeChien;
+	private String label;
 
-	private SexeChien(String sexeChien) {
+	private SexeChien(String label) {
 	}
 
-	public String getSexeChien() {
-		return sexeChien;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setSexeChien(String sexeChien) {
-		this.sexeChien = sexeChien;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 	
