@@ -66,6 +66,7 @@ public class PostulerRestController {
 	@JsonView(Views.CommonPostuler.class)
 	@GetMapping({ "/{id1}/{id2}", "/{id1}/{id2}/" })
 	public ResponseEntity<Postuler> findById(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
+//	public ResponseEntity<Postuler> findById(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2) {
 		Optional<Personne> opt1 = personneRepository.findById(id1);
 		Optional<Annonce> opt2 = annonceRepository.findById(id2);
 		if (opt1.isPresent() && opt2.isPresent()) {
@@ -75,10 +76,12 @@ public class PostulerRestController {
 			if (opt.isPresent()) {
 				return new ResponseEntity<Postuler>(opt.get(), HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.OK);
 			}
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 	}
 
