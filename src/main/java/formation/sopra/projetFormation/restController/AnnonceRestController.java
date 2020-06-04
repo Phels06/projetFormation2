@@ -72,16 +72,17 @@ public class AnnonceRestController {
 	}
 
 	@PostMapping({ "", "/" })
-	public ResponseEntity<Void> add(@Valid @RequestBody Annonce annonce, BindingResult br, UriComponentsBuilder uCB) {
+	public ResponseEntity<Annonce> add(@Valid @RequestBody Annonce annonce, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Annonce>(HttpStatus.BAD_REQUEST);
 		}
 		annonceRepository.save(annonce);
 
-		URI uri = uCB.path("/rest/annonce/{id}").buildAndExpand(annonce.getId()).toUri();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uri);
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//		URI uri = uCB.path("/rest/annonce/{id}").buildAndExpand(annonce.getId()).toUri();
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setLocation(uri);
+//		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Annonce>(annonce, HttpStatus.CREATED);
 	}
 
 //	@JsonView(Views.Common.class)
