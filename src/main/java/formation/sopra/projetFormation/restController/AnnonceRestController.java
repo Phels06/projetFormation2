@@ -74,7 +74,7 @@ public class AnnonceRestController {
 	@PostMapping({ "", "/" })
 	public ResponseEntity<Annonce> add(@Valid @RequestBody Annonce annonce, BindingResult br, UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
-			return new ResponseEntity<Annonce>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		annonceRepository.save(annonce);
 
