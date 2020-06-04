@@ -35,6 +35,8 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 			.authorizeRequests().antMatchers(HttpMethod.POST,"/rest/inscription").permitAll()
 			.and()
 			.authorizeRequests().antMatchers(HttpMethod.POST,"/rest/inscription/").permitAll()
+			.and()
+			.authorizeRequests().antMatchers(HttpMethod.DELETE,"/rest/personne/delete/**").authenticated()
 			.anyRequest().authenticated().and().httpBasic();
 	//		.and()
 	//		.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic();
